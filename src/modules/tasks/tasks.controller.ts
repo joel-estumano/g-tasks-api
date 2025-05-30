@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { TasksService } from './tasks.service';
-import { ApiBadRequestResponse, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 import { PaginateResult } from 'mongoose';
 import { TaskCreateDto } from './dtos/task-create.dto';
 import { TaskDocument } from './entities/task.entity';
@@ -8,8 +8,10 @@ import { TaskOutputDto } from './dtos/task-output.dto';
 import { TaskUpdateDto } from './dtos/task-update.dto';
 import { TasksQueryPaginateDto } from './dtos/tasks-query-paginate.dto';
 import { TasksOutputPaginateDto } from './dtos/tasks-output-paginate.dto';
+import { API_BEARER_AUTH_SCHEME } from '@common/constants/names.tokens.ts';
 
 @Controller('tasks')
+@ApiBearerAuth(API_BEARER_AUTH_SCHEME)
 export class TasksController {
     constructor(private readonly service: TasksService) {}
 

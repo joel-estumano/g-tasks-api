@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsOptional } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 
 export class PaginateQueryDto {
     @ApiProperty({
@@ -10,6 +10,7 @@ export class PaginateQueryDto {
         default: true,
     })
     @IsOptional()
+    @Transform(({ value }) => value === 'true' || value === true) // Converte corretamente para boolean
     @IsBoolean()
     pagination: boolean = true;
 
