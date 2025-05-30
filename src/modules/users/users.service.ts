@@ -13,21 +13,21 @@ export class UsersService {
     ) {}
 
     async create(dto: UserCreateDto): Promise<UserDocument> {
-        const createdUser = new this.model(dto);
-        return createdUser.save(); // O middleware `pre('save')` no UserSchema cuidará da criptografia da senha
+        const userModel = new this.model(dto);
+        return await userModel.save(); // O middleware `pre('save')` no UserSchema cuidará da criptografia da senha
     }
 
     /**
-     * Busca um usuário no banco de dados com base na propriedade especificada.
+     * Finds a user in the database based on the specified property.
      *
-     * @param {UserKeys} prop - Propriedade pela qual deseja buscar (exemplo: 'email', 'name').
-     * @param {string} arg - Valor da propriedade que deseja encontrar.
-     * @param {UserKeys[] | null} select - Campos opcionais para retornar na consulta.
-     * @returns {Promise<UserDocument | null>} - Retorna um usuário se encontrado ou `null` caso contrário.
+     * @param {UserKeys} prop - The property to search by (e.g., 'email', 'name').
+     * @param {string} arg - The value of the property to find.
+     * @param {UserKeys[] | null} select - Optional fields to return in the query.
+     * @returns {Promise<UserDocument | null>} - Returns a user if found, or `null` otherwise.
      *
      * @example
      * ```typescript
-     * const user = await usersService.find('email', 'usuario@email.com', ['name', 'email']);
+     * const user = await usersService.findOne('email', 'user@email.com', ['name', 'email']);
      * console.log(user);
      * ```
      */

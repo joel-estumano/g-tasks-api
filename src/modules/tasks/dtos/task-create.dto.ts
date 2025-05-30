@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsDateString, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 import { StatusEnum } from '../enums/status.enum';
 
 export class TaskCreateDto {
     @ApiProperty({
-        description: 'user id',
+        description: 'Unique identifier of the user who owns the task',
         example: '6838f7920ac32a6299091004',
     })
     @IsNotEmpty()
@@ -12,34 +12,37 @@ export class TaskCreateDto {
     user: string;
 
     @ApiProperty({
-        description: 'task title',
-        example: 'work validation',
+        description: 'Title of the task',
+        example: 'Complete project report',
     })
     @IsNotEmpty()
     @IsString()
     title: string;
 
     @ApiProperty({
-        description: 'task description',
-        example: 'details of work',
+        description: 'Detailed description of the task',
+        example: 'Prepare and submit the final project report to the manager.',
     })
     @IsNotEmpty()
     @IsString()
     description: string;
 
     @ApiProperty({
-        description: 'task status',
+        description: 'Current status of the task',
         enum: StatusEnum,
         example: StatusEnum.OPEN,
+        default: StatusEnum.OPEN,
+        required: false,
     })
     @IsNotEmpty()
     @IsEnum(StatusEnum)
     status: StatusEnum;
 
     @ApiProperty({
-        description: 'due date',
+        description: 'Due date for task completion',
         example: '2025-06-01T12:00:00.000Z',
     })
-    @IsDate()
+    @IsNotEmpty()
+    @IsDateString()
     duedate: Date;
 }
