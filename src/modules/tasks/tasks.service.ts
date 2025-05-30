@@ -29,7 +29,7 @@ export class TasksService {
             pagination: dto.pagination,
         };
 
-        let query: mongoose.FilterQuery<TaskDocument> = {};
+        const query: mongoose.FilterQuery<TaskDocument> = {};
 
         return await (this.model as PaginateModel<TaskDocument>).paginate(query, options);
     }

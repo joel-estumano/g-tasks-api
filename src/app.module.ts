@@ -22,7 +22,7 @@ import { TasksModule } from './modules/tasks/tasks.module';
         }),
         MongooseModule.forRootAsync({
             inject: [dbConfig.KEY],
-            useFactory: async (dbConfigKey: ConfigType<typeof dbConfig>) => ({
+            useFactory: (dbConfigKey: ConfigType<typeof dbConfig>) => ({
                 uri: dbConfigKey.uri,
             }),
         }),
