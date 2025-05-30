@@ -8,11 +8,13 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
+import { TasksModule } from './modules/tasks/tasks.module';
 
 @Module({
     imports: [
         AuthModule,
         UsersModule,
+        TasksModule,
         ConfigModule.forRoot({
             envFilePath: ['.env.local'],
             isGlobal: true,

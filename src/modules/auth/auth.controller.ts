@@ -5,8 +5,10 @@ import { AuthService } from './auth.service';
 import { UserDocument } from '../users/entities/user.entity';
 import { LocalAuthGuard } from './guards/local/local-auth.guard';
 import { JwtRefreshGuard } from './guards/jwt-refresh/jwt-refresh.guard';
+import { ApiExcludeController } from '@nestjs/swagger';
 
 @Controller('auth')
+@ApiExcludeController()
 export class AuthController {
     constructor(private authService: AuthService) {}
 
