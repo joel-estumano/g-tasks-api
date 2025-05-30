@@ -1,18 +1,22 @@
-import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigType } from '@nestjs/config';
-import { dbConfig } from './common/configs';
+import { dbConfig, jwtConfig, jwtRefreshConfig } from './common/configs';
+import { JwtAuthGuard } from './modules/auth/guards/jwt-auth/jwt-auth.guard';
+import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 
 @Module({
     imports: [
+        AuthModule,
         UsersModule,
         ConfigModule.forRoot({
             envFilePath: ['.env.local'],
             isGlobal: true,
-            load: [dbConfig],
+            load: [dbConfig, jwtConfig, jwtRefreshConfig],
         }),
         MongooseModule.forRootAsync({
             inject: [dbConfig.KEY],
@@ -22,6 +26,12 @@ import { UsersModule } from './modules/users/users.module';
         }),
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [
+        AppService,
+        {
+            provide: APP_GUARD,
+            useClass: JwtAuthGuard,
+        },
+    ],
 })
 export class AppModule {}

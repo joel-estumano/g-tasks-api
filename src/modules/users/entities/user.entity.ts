@@ -1,9 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { BaseEntity } from 'src/common/entities/base.entity';
+import { BaseEntity } from '@common/entities/base.entity';
 import { Document } from 'mongoose';
 import { encryptPassword } from '../utils';
 
 export type UserDocument = UserEntity & Document;
+export type UserKeys = keyof UserDocument;
 
 @Schema({ timestamps: true, collection: 'users' })
 export class UserEntity extends BaseEntity {
