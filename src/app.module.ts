@@ -4,9 +4,11 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigType } from '@nestjs/config';
 import { dbConfig } from './common/configs';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
     imports: [
+        UsersModule,
         ConfigModule.forRoot({
             envFilePath: ['.env.local'],
             isGlobal: true,
