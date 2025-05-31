@@ -10,7 +10,7 @@ export type TaskDocument = TaskEntity & Document;
 @Schema({ timestamps: true, collection: 'tasks' })
 export class TaskEntity extends BaseEntity {
     @Prop({ required: true, type: Types.ObjectId, ref: UserEntity.name })
-    user: string;
+    userId: Types.ObjectId;
 
     @Prop({ required: true })
     title: string;
@@ -18,7 +18,7 @@ export class TaskEntity extends BaseEntity {
     @Prop({ required: true, default: '' })
     description: string;
 
-    @Prop({ required: true, enum: StatusEnum, default: StatusEnum.OPEN })
+    @Prop({ required: true, enum: Object.values(StatusEnum), default: StatusEnum.OPEN })
     status: StatusEnum;
 
     @Prop({ required: true, type: Date })

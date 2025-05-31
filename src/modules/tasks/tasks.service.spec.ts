@@ -1,8 +1,10 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { TasksService } from './tasks.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { TaskEntity, TaskDocument } from './entities/task.entity';
+import { Test, TestingModule } from '@nestjs/testing';
+
 import { Model } from 'mongoose';
+
+import { TaskDocument, TaskEntity } from './entities/task.entity';
+import { TasksService } from './tasks.service';
 
 describe('TasksService', () => {
     let service: TasksService;

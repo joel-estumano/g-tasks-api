@@ -9,14 +9,18 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TasksModule } from './modules/tasks/tasks.module';
 import { UsersModule } from './modules/users/users.module';
+import { UserProfilesModule } from './modules/user-profiles/user-profiles.module';
 
 @Module({
     imports: [
         // 🔐 Módulo de autenticação, responsável por login e controle de acesso
         AuthModule,
 
-        // 👤 Módulo de usuários, gerencia operações como criação e atualização de perfis
+        // 👤 Módulo de usuários
         UsersModule,
+
+        // 👤 Módulo de perfís usuários, gerencia operações como atualização de perfis
+        UserProfilesModule,
 
         // ✅ Módulo de tarefas, usado para criar, listar e gerenciar atividades
         TasksModule,

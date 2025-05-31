@@ -1,7 +1,7 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { BaseEntity } from '@common/entities/base.entity';
 import { Document } from 'mongoose';
 import { encryptPassword } from '../utils';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export type UserDocument = UserEntity & Document;
 export type UserKeys = keyof UserDocument;
@@ -30,11 +30,11 @@ UserSchema.pre('save', function (next) {
 });
 
 // Middleware para criptografar antes de uma atualização
-UserSchema.pre('findOneAndUpdate', function (next) {
-    const update = this.getUpdate() as Partial<UserDocument>;
-    if (update.password) {
-        update.password = encryptPassword(update.password);
-    }
-    this.setUpdate(update);
-    next();
-});
+// UserSchema.pre('findOneAndUpdate', function (next) {
+//     const update = this.getUpdate() as Partial<UserDocument>;
+//     if (update.password) {
+//         update.password = encryptPassword(update.password);
+//     }
+//     this.setUpdate(update);
+//     next();
+// });

@@ -1,34 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { BaseOutputDto } from '@common/dtos/base-output.dto';
+import { IntersectionType } from '@nestjs/swagger';
 import { TaskCreateDto } from './task-create.dto';
 
-export class TaskOutputDto extends TaskCreateDto {
-    @ApiProperty({
-        description: 'Unique identifier for the task',
-        example: '60d21b4667d0d8992e610c85',
-    })
-    _id: string;
-
-    @ApiProperty({
-        description: 'Indicates whether the task is active',
-        example: true,
-    })
-    active: boolean;
-
-    @ApiProperty({
-        description: 'Date when the task was created',
-        example: '2023-04-06T11:54:03.000Z',
-    })
-    createdAt: Date;
-
-    @ApiProperty({
-        description: 'Date when the task was last updated',
-        example: '2023-05-30T12:20:00.000Z',
-    })
-    updatedAt: Date;
-
-    @ApiProperty({
-        description: 'Version number of the document',
-        example: 0,
-    })
-    __v: number;
-}
+export class TaskOutputDto extends IntersectionType(TaskCreateDto, BaseOutputDto) {}

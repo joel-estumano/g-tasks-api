@@ -1,7 +1,9 @@
-import { API_BEARER_AUTH_SCHEME } from '@common/constants/names.tokens.ts';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { INestApplication } from '@nestjs/common';
+import { API_BEARER_AUTH_SCHEME } from '@common/decorators/api-bearer.decorator';
+
 import { SwaggerTheme, SwaggerThemeNameEnum } from 'swagger-themes';
+
+import { INestApplication } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export const setupSwagger = (app: INestApplication): void => {
     // 📌 Define o título da documentação da API
