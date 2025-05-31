@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDateString, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { StatusEnum } from '../enums/status.enum';
 
 export class TaskCreateDto {
@@ -34,7 +34,7 @@ export class TaskCreateDto {
         default: StatusEnum.OPEN,
         required: false,
     })
-    @IsNotEmpty()
+    @IsOptional()
     @IsEnum(StatusEnum)
     status: StatusEnum;
 
